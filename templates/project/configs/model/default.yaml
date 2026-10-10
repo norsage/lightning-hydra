@@ -1,0 +1,22 @@
+_target_: __pkg__.model.lightning.Regressor
+
+net:
+  _target_: __pkg__.model.mlp.MLP
+  in_features: ${data.num_features}
+  hidden: 64
+  num_layers: 2
+
+# Built in configure_optimizers: `_partial_` gives a function that lacks
+# only the model's parameters (or the optimizer).
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 1.0e-3
+  weight_decay: 1.0e-2
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.5
+  patience: 10

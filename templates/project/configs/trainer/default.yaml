@@ -1,0 +1,10 @@
+_target_: lightning.pytorch.Trainer
+# auto: CUDA if there is one, else MPS on Mac, else CPU.
+accelerator: auto
+devices: 1
+max_epochs: 50
+log_every_n_steps: 10
+# warn: deterministic algorithms where they exist and a warning where they
+# do not. true fails on some CUDA kernels (scatter in PyG).
+deterministic: warn
+default_root_dir: ${paths.output_dir}

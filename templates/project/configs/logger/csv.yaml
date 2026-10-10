@@ -1,0 +1,5 @@
+# Metrics in <output dir>/csv/version_0/metrics.csv.
+# No logger: logger=none.
+_target_: lightning.pytorch.loggers.CSVLogger
+save_dir: ${paths.output_dir}
+name: csv

@@ -1,0 +1,8 @@
+# Stub: synthetic regression, so that the skeleton trains right away.
+# Replace with the project's DataModule.
+_target_: __pkg__.data.datamodule.RandomRegressionDataModule
+num_samples: 1024
+num_features: 16
+batch_size: 64
+num_workers: 0
+seed: ${seed}

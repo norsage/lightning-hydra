@@ -1,0 +1,15 @@
+# @package _global_
+# An experiment: overrides on top of train.yaml.
+#   python scripts/train.py experiment=example
+# Outputs: logs/runs/example/<date_time>/
+
+name: example
+
+model:
+  net:
+    hidden: 128
+  optimizer:
+    lr: 3.0e-4
+
+trainer:
+  max_epochs: 20

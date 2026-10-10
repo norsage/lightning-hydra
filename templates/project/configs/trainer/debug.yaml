@@ -1,0 +1,7 @@
+# A check that everything builds: one batch each of train/val/test.
+#   python scripts/train.py trainer=debug
+defaults:
+  - default
+
+fast_dev_run: true
+accelerator: cpu

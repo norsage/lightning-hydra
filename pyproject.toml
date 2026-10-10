@@ -1,0 +1,32 @@
+[project]
+name = "lightning-hydra-skill"
+version = "0.0.0"
+description = "Development environment for the lightning-hydra skill: tests and linter only, not a package"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6", "pyright>=1.1.400"]
+# Imports of templates/project/ for pyright; the versions are the skeleton's,
+# torch from PyPI (no CUDA index, no pyg-lib: the templates do not import PyG).
+templates = [
+    "torch>=2.11,<2.12",
+    "lightning>=2.5",
+    "hydra-core>=1.3",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.pyright]
+pythonVersion = "3.12"
+include = ["scripts", "tests", "templates/project"]
+# __pkg__ is a valid identifier: the template package resolves as is.
+extraPaths = ["templates/project/src"]

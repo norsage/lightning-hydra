@@ -1,0 +1,40 @@
+# The main training config: only the choice of groups and shared fields;
+# everything instantiated with `_target_` lives in the groups.
+defaults:
+  - data: default
+  - model: default
+  - trainer: default
+  - callbacks: default
+  - logger: csv
+  - _self_
+  # The experiment comes last and overrides everything above:
+  #   python scripts/train.py experiment=example
+  - optional experiment: null
+
+# Run name: part of the output directory's path.
+name: default
+
+seed: 42
+
+# Run test on the best checkpoint after fit.
+test: true
+
+# Resuming: null, from scratch; a path, from that checkpoint; last, from
+# paths.ckpt_dir/last.ckpt if it exists (a rerun into the same
+# hydra.run.dir). resolve_ckpt_path in scripts/train.py chooses.
+ckpt_path: null
+
+paths:
+  log_dir: logs
+  output_dir: ${hydra:runtime.output_dir}
+  ckpt_dir: ${paths.output_dir}/checkpoints
+
+hydra:
+  # Output directories. A transport to a remote cluster overrides them whole.
+  run:
+    dir: ${paths.log_dir}/runs/${name}/${now:%Y-%m-%d_%H-%M-%S}
+  sweep:
+    dir: ${paths.log_dir}/multiruns/${name}/${now:%Y-%m-%d_%H-%M-%S}
+    subdir: ${hydra.job.num}
+  # Hydra callbacks (run tracking and the like). None by default.
+  callbacks: {}

@@ -1,0 +1,17 @@
+# Lightning callbacks: a mapping, each value instantiated with `_target_`.
+# To turn one off: callbacks.early_stopping=null.
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: ${paths.ckpt_dir}
+  monitor: val/loss
+  mode: min
+  filename: "epoch_{epoch:03d}"
+  auto_insert_metric_name: false
+  save_top_k: 1
+  save_last: true
+
+early_stopping:
+  _target_: lightning.pytorch.callbacks.EarlyStopping
+  monitor: val/loss
+  mode: min
+  patience: 20

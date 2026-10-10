@@ -1,0 +1,4 @@
+# No callbacks of our own: callbacks=none. Lightning still saves the last
+# checkpoint to <output>/checkpoints/; to turn it off entirely:
+# trainer.enable_checkpointing=false.
+{}
